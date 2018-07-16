@@ -1,0 +1,22 @@
+
+
+.jumbotron {
+
+background-image: url("train2.jpg");
+background-repeat: no-repeat;
+color: wheat;
+
+};
+
+#card-header {
+color:wheat;
+background: maroon;
+padding:0;
+
+
+};
+
+.card {
+    border:maroon;
+
+}

@@ -20,54 +20,98 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="card">
 
-    <div class="card">
-        
-            <div class="card-body">
-                <p id="card-header"> Current Train Schedule</p>
-                <hr>
-            </div>
-            <div class="row">
+            <!-- <div class="card-body"> -->
+            <p id="sched-header"> Current Train Schedule</p>
+            <hr>
+            <!-- </div> -->
+            <!-- <div class="row">
                 <div class="card-body col-md-2">
-                        <p id="card-header"> Train Name</p>
+                        <p id="cardTrain"> Train Name</p>
                 </div>
                 <div class="card-body col-md-2">
-                        <p id="card-header"> Destination</p>
+                        <p id="cardDest"> Destination</p>
                 </div>
                 <div class="card-body col-md-2">
-                        <p id="card-header"> Frequency</p>
+                        <p id="cardFreq"> Frequency</p>
                 </div>
                 <div class="card-body col-md-2">
-                        <p id="card-header"> Next Arrival</p>
+                        <p id="cardNext"> Next Arrival</p>
                 </div>
                 <div class="card-body col-md-2">
-                        <p id="card-header"> Time Left</p>
-                </div>
-            </div>    
+                        <p id="cardTimeLeft"> Time Left</p>
+                </div> -->
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (mins)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Time Left</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th id="tableTrain" scope="row">Silver Streak</th>
+                        <td id="tableDestination">Greensboro</td>
+                        <td id="tableFrequency">120</td>
+                        <td id="tableNextArrival">10:00pm</td>
+                        <td id="tableTimeLeft">10</td>
+                        <td>
+                        <button type="submit" id="deleteBtn" class="btn btn-primary">Delete</button>
+                        </td>   
+                    </tr>
+                    <!-- This section is just for initial display purposes.  Delete once start coding -->
+                    <tr>
+                            <th id="tableTrain" scope="row">Silver Streak</th>
+                            <td id="tableDestination">Greensboro</td>
+                            <td id="tableFrequency">120</td>
+                            <td id="tableNextArrival">10:00pm</td>
+                            <td id="tableTimeLeft">10</td>
+                            <td>
+                            <button type="submit" id="deleteBtn" class="btn btn-primary">Delete</button>
+                            </td>
+                        </tr>
+
+                </tbody>
+            </table>
         </div>
+    </div>
 
-    <div class="card">    
+    <div class="container">
+    <div class="card" id="inputForm">
         <form>
-            
-                <div class="form-group col-md-11">
-                    <label for="formGroupExampleInput">Train Name</label>
-                    <input type="text" class="form-control" id="InputTrainName" placeholder="">
-                </div>
-                <div class="form-group col-md-11">
-                    <label for="formGroupExampleInput2">Destination</label>
-                    <input type="text" class="form-control" id="inputDestination" placeholder="">
-                </div>
-                <div class="form-group col-md-11">
-                    <label for="formGroupExampleInput">Train Name</label>
-                    <input type="text" class="form-control" id="InputTrainName" placeholder="">
-                </div>
-                <div class="form-group col-md-11">
+
+            <div class="form-group col-md-10" id="trainLabel">
+                <label for="formGroupExampleInput">Train Name</label>
+                <input type="text" class="form-control" id="inputTrainName" placeholder="">
+            </div>
+            <div class="form-group col-md-10">
                 <label for="formGroupExampleInput2">Destination</label>
                 <input type="text" class="form-control" id="inputDestination" placeholder="">
+            </div>
+            <div class="form-group col-md-10">
+                <label for="formGroupExampleInput">Frequency</label>
+                <input type="text" class="form-control" id="inputFrequency" placeholder="">
+            </div>
+            <div class="form-group col-md-10">
+                <label for="formGroupExampleInput2">Next Arrival</label>
+                <input type="text" class="form-control" id="inputNextArrival" placeholder="">
+            </div>
+            <div class="form-group col-md-10">
+                    <label for="formGroupExampleInput2">Time Left</label>
+                    <input type="text" class="form-control" id="inputTimeLeft" placeholder="">
                 </div>
-           
+            <button type="submit" id="submit" class="btn btn-primary col-md-2">Submit</button>
+
         </form>
-    </div>    
+    </div>
+    </div>
 </body>
 
 </html>

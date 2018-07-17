@@ -1,22 +1,61 @@
+* {
+box-sizing: border-box;
 
+}
 
 .jumbotron {
 
 background-image: url("train2.jpg");
-background-repeat: no-repeat;
+/* background-repeat: no-repeat; */
 color: wheat;
 
-};
+}
 
-#card-header {
+#sched-header {
 color:wheat;
-background: maroon;
-padding:0;
+background: skyblue;
+padding:5px;
+font-size: 30px;
+margin: 0px;
 
 
-};
+}
 
-.card {
-    border:maroon;
+.card-body {
+    /* border:maroon;*/
+    margin: 10px; 
+}
 
+#submit {
+    margin-right:200px;
+    float:right;
+    background: skyblue;
+    color: wheat;
+}
+
+hr {
+    margin:0px;
+    width: 3px;
+}
+
+#inputForm {
+    margin-top: 15px;
+}
+
+#trainLabel {
+    margin-top:15px;
+}
+#card-header,
+.form-group {
+    font-weight: bold;
+}
+
+#cardTrain{
+    margin-left: 15px;
+}
+
+#deleteBtn {
+    float:right;
+    background: skyblue;
+    color: wheat; 
 }

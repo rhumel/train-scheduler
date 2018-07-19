@@ -1,24 +1,22 @@
+
+
 /* global moment firebase */
-
-
-//Initialize Fifebase
-
-<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-
-  // Initialize Firebase
+ 
+  //Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDXdKKjmL5stz2Uiwpuk1KXF-qjR6ePMlE",
-    authDomain: "newclass-3a213.firebaseapp.com",
-    databaseURL: "https://newclass-3a213.firebaseio.com",
-    projectId: "newclass-3a213",
-    storageBucket: "newclass-3a213.appspot.com",
-    messagingSenderId: "479660177875"
+    apiKey: "AIzaSyAiRUFveVYRzoTlqvEU2eRtujEMTCxGj5w",
+    authDomain: "train-92517.firebaseapp.com",
+    databaseURL: "https://train-92517.firebaseio.com",
+    projectId: "train-92517",
+    storageBucket: "",
+    messagingSenderId: "812298848333"
   };
 
   firebase.initializeApp(config);
 
+
   //create a variable to reference the database  
-    var database = firebase.database.ref();
+    const database = firebase.database();
     
   //Initial Values
     var trainName = "";
@@ -26,26 +24,98 @@
     var frequency = "";
     var nextArrival = "";
     var timeLeft = "";
+    var key;
 
 
 //   -----------------------------------------------------------
  // Capture Button click
- $("submit").on ("click", function(event) {
+ $("#submit").on ("click", function(event) {
      //keep the page from refreshing
      event.preventDefault();
 
-     trainName = $("inputTrainName").val().trim();
-     destination = $("inputDestination").val().trim();
-     frequency = $("inputFrequency").val().trim();
-     nextArrival = $("inputNextArrival").val().trim();
-     timeLeft = $("inputTimeLeft").val().trim();
+
+     trainName = $("#inputTrainName").val().trim();
+     destination = $("#inputDestination").val().trim();
+     frequency = $("#inputFrequency").val().trim();
+     nextArrival = $("#inputNextArrival").val().trim();
+     timeLeft = $("#inputTimeLeft").val().trim();
 
 
+     console.log(trainName);
+     console.log(destination);
+     console.log(frequency);
+     console.log(nextArrival);
+     console.log(timeLeft);
+
+  //    database.ref().push({
+  //     trainName: trainName,
+  //     destination: destination,
+  //     frequency: frequency,
+  //     nextArrival: nextArrival,
+  //     timeLeft: timeLeft
+  // });
+
+  var newTrain = {
+    trainName: trainName,
+    destination: destination,
+    frequency: frequency,
+    nextArrival: nextArrival,
+    timeLeft: timeLeft
+  
+  };
+  
+  database.ref().push(newTrain);
+  
+     console.log(database);
+     $("#inputTrainName").html("");
+     $("#inputDestination").html("");
+     $("#inputFrequency").html("");
+     $("#inputNextArrival").html("");
+     $("#inputTimeLeft").html("");
+   
+    
+    //firebase load
+
+    database.ref().on("child_added", function(snapshot) {  
+
+        console.log(snapshot.val());
+        console.log(snapshot.key);
+        console.log(snapshot.val().trainName);
+        console.log(snapshot.val().destination);
+        console.log(snapshot.val().frequency);
+        console.log(snapshot.val().nextArrival);
+        console.log(snapshot.val().timeLeft);
+
+        key=snapshot.key;
+        //Move snapshot value to newtrainSnapshot
+        newTrainSnapshot=snapshot.val();
+        
+        var newRow= $("<tr>")
+        var td0 = $("<td>").text(newTrainSnapshot.trainName);
+        var td1 =$("<td>").text(newTrainSnapshot.destination);
+        var td2 =$("<td>").text(newTrainSnapshot.frequency);
+        var td3 =$("<td>").text(newTrainSnapshot.nextArrival);
+        var td4 =$("<td>").text(newTrainSnapshot.timeLeft);
+
+        $("#tbody").append(newRow).append(td0).append(td1).append(td2).append(td3).append(td4);
+      
+        console.log($("#tbody"));        
+        console.log($("<tr>").text(newTrainSnapshot.trainName));
+        console.log($("<td>").text(newTrainSnapshot.destination));
+        console.log($("<td>").text(newTrainSnapshot.frequency));
+        console.log($("<td>").text(newTrainSnapshot.nextArrival));
+        console.log($("<td>").text(newTrainSnapshot.timeLeft));
+
+
+        
+     
+
+
+      // Handle the errors
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+      });
 
  });
 
- 
-<script src="https://code.jquery.com/jquery.js"></script>
 
-
- 

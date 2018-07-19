@@ -6,7 +6,8 @@ box-sizing: border-box;
 .jumbotron {
 
 background-image: url("train2.jpg");
-/* background-repeat: no-repeat; */
+/* 
+background-repeat: no-repeat; */
 color: wheat;
 
 }
@@ -58,4 +59,12 @@ hr {
     float:right;
     background: skyblue;
     color: wheat; 
+}
+
+.float-left {
+    float: left;
+}
+
+.flot-right {
+    float: right;
 }

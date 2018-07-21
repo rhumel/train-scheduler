@@ -23,7 +23,7 @@
     var destination = "";
     var frequency = "";
     var nextArrival = "";
-    var timeLeft = "";
+     var timeLeft = "";
     var key;
 
 
@@ -37,8 +37,8 @@
      trainName = $("#inputTrainName").val().trim();
      destination = $("#inputDestination").val().trim();
      frequency = $("#inputFrequency").val().trim();
-     nextArrival = $("#inputNextArrival").val().trim();
-     timeLeft = $("#inputTimeLeft").val().trim();
+    //  nextArrival = $("#inputNextArrival").val().trim();
+    //  timeLeft = $("#inputTimeLeft").val().trim();
 
 
      console.log(trainName);
@@ -47,21 +47,12 @@
      console.log(nextArrival);
      console.log(timeLeft);
 
-  //    database.ref().push({
-  //     trainName: trainName,
-  //     destination: destination,
-  //     frequency: frequency,
-  //     nextArrival: nextArrival,
-  //     timeLeft: timeLeft
-  // });
 
   var newTrain = {
     trainName: trainName,
     destination: destination,
     frequency: frequency,
-    nextArrival: nextArrival,
-    timeLeft: timeLeft
-  
+    
   };
   
   database.ref().push(newTrain);
@@ -70,14 +61,13 @@
      $("#inputTrainName").val("");
      $("#inputDestination").val("");
      $("#inputFrequency").val("");
-     $("#inputNextArrival").val("");
-     $("#inputTimeLeft").val("");
+    
 
   
  });
 
 
- // this is the Firebase 
+ // this adds new records to firebase 
  database.ref().on("child_added", function(snapshot) {  
 
   console.log(snapshot.val());
@@ -85,24 +75,51 @@
   console.log(snapshot.val().trainName);
   console.log(snapshot.val().destination);
   console.log(snapshot.val().frequency);
-  console.log(snapshot.val().nextArrival);
-  console.log(snapshot.val().timeLeft);
+
 
   key=snapshot.key;
-  //Move snapshot value to newtrainSnapshot
-  // var convertedDate = moment(snapshot.val().nextAririval, "MM/DD/YYYY");
+// time   
+
+var currentTime = moment().format("HH:mm a");
+
+
+
+
+$("#local-time").text("Current Local Time: "+currentTime);
+//setInterval(timeCalculation,60000);
   
- // console.log(convertedDate);
+console.log(currentTime);
+
+
   newTrainSnapshot=snapshot.val();
-  
+
+  nextArrival= moment(currentTime, "HH:mm").add(newTrainSnapshot.frequency,"minutes").format("HH:mm");
+
+
+var convertedDate = moment(nextArrival, "HH:mm a").format("LT");
+
+var cTime = moment(nextArrival, "hh:mm a");
+timeLeft = -1* (moment(moment()).diff(cTime, "minutes"));
+
+console.log(convertedDate);
+console.log(cTime);
+console.log(timeLeft);
+
+
   var newRow= $("<tr>")
   var td0 = $("<td>").text(newTrainSnapshot.trainName);
   var td1 =$("<td>").text(newTrainSnapshot.destination);
   var td2 =$("<td>").text(newTrainSnapshot.frequency);
-  var td3 =$("<td>").text(newTrainSnapshot.nextArrival);
-  var td4 =$("<td>").text(newTrainSnapshot.timeLeft);
+  var td3 =$("<td>").text(nextArrival);
+  var td4 =$("<td>").text(timeLeft);
 
-  $("#tbody").append(newRow).append(td0).append(td1).append(td2).append(td3).append(td4);
+  var button = $("<button>");
+          button.addClass("del-btn");
+          button.attr("data-key", key);
+          button.text("Delete");
+          
+
+  $("#tbody").append(newRow).append(td0).append(td1).append(td2).append(td3).append(td4).append(button);
 
   console.log($("#tbody"));        
   console.log($("<tr>").text(newTrainSnapshot.trainName));
@@ -110,14 +127,20 @@
   console.log($("<td>").text(newTrainSnapshot.frequency));
   console.log($("<td>").text(newTrainSnapshot.nextArrival));
 
-
-  
-
-
-
 // Handle the errors
 }, function(errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
+//on click for delete button
 
+$(document).on("click", ".del-btn", function() {
+  //keep the page from refreshing
+  event.preventDefault();
 
+    var deleteKey = $(this).attr("data-key");
+    console.log(deleteKey);
+    database.ref().child(deleteKey).remove();
+
+    $(this).closest('tr').remove();
+
+});

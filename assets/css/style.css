@@ -15,7 +15,7 @@ color: wheat;
 #sched-header {
 color:wheat;
 background: skyblue;
-padding:5px;
+padding:15px;
 font-size: 30px;
 margin: 0px;
 
@@ -55,7 +55,7 @@ hr {
     margin-left: 15px;
 }
 
-#deleteBtn {
+.del-btn {
     float:right;
     background: skyblue;
     color: wheat; 
@@ -63,8 +63,16 @@ hr {
 
 .float-left {
     float: left;
+    background: skyblue;
 }
 
-.flot-right {
+.float-right {
     float: right;
+    background: skyblue;
+    padding:20px;
+    font-size: 20px;
+}
+.card-head {
+    background: skyblue;
+    color: wheat; 
 }

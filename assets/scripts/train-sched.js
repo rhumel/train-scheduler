@@ -118,8 +118,8 @@ console.log(timeLeft);
           button.attr("data-key", key);
           button.text("Delete");
           
-
-  $("#tbody").append(newRow).append(td0).append(td1).append(td2).append(td3).append(td4).append(button);
+  newRow.append(td0).append(td1).append(td2).append(td3).append(td4).append(button);
+  $("#tbody").append(newRow)
 
   console.log($("#tbody"));        
   console.log($("<tr>").text(newTrainSnapshot.trainName));
@@ -138,9 +138,10 @@ $(document).on("click", ".del-btn", function() {
   event.preventDefault();
 
     var deleteKey = $(this).attr("data-key");
+
     console.log(deleteKey);
     database.ref().child(deleteKey).remove();
 
-    $(this).closest('tr').remove();
+    $(this).parent().remove();
 
 });
